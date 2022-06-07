@@ -30,7 +30,7 @@ public class MeCommand extends VanillaCommand {
 			message.append(arg);
 		}
 
-		Bukkit.broadcastMessage("* " + message);
+		Bukkit.broadcastMessage("§catención atención " + message);
 
 		return true;
 	}
