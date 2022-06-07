@@ -36,10 +36,10 @@ public class BanCommand extends VanillaCommand {
 
 		Player player = Bukkit.getPlayer(args[0]);
 		if (player != null) {
-			player.kickPlayer("Banned by admin.");
+			player.kickPlayer("mi loco dele pa fuera");
 		}
 
-		Command.broadcastCommandMessage(sender, "Banned player " + args[0]);
+		Command.broadcastCommandMessage(sender, "§bcoso " + args[0]);
 		return true;
 	}
 
