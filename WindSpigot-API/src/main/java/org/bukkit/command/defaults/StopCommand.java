@@ -25,7 +25,7 @@ public class StopCommand extends VanillaCommand {
 		if (!testPermission(sender))
 			return true;
 
-		Command.broadcastCommandMessage(sender, "Stopping the server..");
+		Command.broadcastCommandMessage(sender, "§cDeteniendo el servidor.");
 		Bukkit.shutdown();
 
 		String reason = this.createString(args, 0);
