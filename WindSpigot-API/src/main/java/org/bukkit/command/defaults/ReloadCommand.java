@@ -25,8 +25,9 @@ public class ReloadCommand extends BukkitCommand {
 				+ "Please note that this command is not supported and may cause issues when using some plugins.");
 		Command.broadcastCommandMessage(sender,
 				ChatColor.RED + "If you encounter any issues please use the /stop command to restart your server.");
-		Bukkit.reload();
-		Command.broadcastCommandMessage(sender, ChatColor.GREEN + "Reload complete.");
+		//Bukkit.reload();
+		//hasta los cojones del reload
+		Command.broadcastCommandMessage(sender, ChatColor.GREEN + "lol");
 
 		return true;
 	}
