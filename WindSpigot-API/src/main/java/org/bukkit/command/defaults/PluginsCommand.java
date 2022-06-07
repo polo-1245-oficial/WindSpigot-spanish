@@ -21,7 +21,7 @@ public class PluginsCommand extends BukkitCommand {
 		if (!testPermission(sender))
 			return true;
 
-		sender.sendMessage("Plugins " + getPluginList());
+		sender.sendMessage("§cque miras");
 		return true;
 	}
 
