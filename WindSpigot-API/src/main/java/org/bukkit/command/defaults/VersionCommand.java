@@ -28,8 +28,8 @@ public class VersionCommand extends BukkitCommand {
 			return true;
 
 		if (args.length == 0) {
-			sender.sendMessage("This server is running " + Bukkit.getVersion()
-					+ " (Implementing API version " + Bukkit.getBukkitVersion() + ")");
+			sender.sendMessage("§bEste servidor está funcionando por " + Bukkit.getVersion()
+					+ " (Implementando la versión de la API " + Bukkit.getBukkitVersion() + ") + §bTraducción & customizado a medida pa polo_1245");
 		} else {
 			StringBuilder name = new StringBuilder();
 
