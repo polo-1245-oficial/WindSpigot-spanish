@@ -39,7 +39,7 @@ public class DeopCommand extends VanillaCommand {
 			((Player) player).sendMessage(ChatColor.YELLOW + "You are no longer op!");
 		}
 
-		Command.broadcastCommandMessage(sender, "De-opped " + args[0]);
+		Command.broadcastCommandMessage(sender, "§cOP eliminado a " + args[0]);
 		return true;
 	}
 
