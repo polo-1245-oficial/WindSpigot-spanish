@@ -1,7 +1,7 @@
 name: WindSpigot PR Build
 
 on:
-  push:
+  pull_request:
 
 jobs:
   cleanup-and-build:
