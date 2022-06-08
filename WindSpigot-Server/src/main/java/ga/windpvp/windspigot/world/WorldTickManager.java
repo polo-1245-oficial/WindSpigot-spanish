@@ -1,10 +1,10 @@
 package ga.windpvp.windspigot.world;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import ga.windpvp.windspigot.async.AsyncUtil;
@@ -19,7 +19,7 @@ import net.minecraft.server.WorldServer;
 public class WorldTickManager {
 
 	// List of cached world tickers
-	private List<WorldTicker> worldTickers = new ArrayList<>();
+	private final List<WorldTicker> worldTickers = Lists.newCopyOnWriteArrayList();
 
 	// Latch to wait for world tick completion
 	private final ResettableLatch latch = new ResettableLatch();
@@ -65,8 +65,7 @@ public class WorldTickManager {
 				}
 				
 			}
-			// Null check to prevent resetting the latch when not using parallel worlds
-			if (this.latch != null) {
+			if (isAsync) {
 				// Reuse the latch
 				this.latch.reset(this.worldTickers.size());
 			}
@@ -103,24 +102,28 @@ public class WorldTickManager {
 		// Cache world tick runnables if not cached already
 		this.cacheWorlds(true); // Cache them as async world tickers
 
+		int asyncTaskCount = worldTickers.size() - 1;
+		
 		// Tick each world with a reused runnable on its own thread, except the last ticker (that one is run sync)
 		for (int index = 0; index < this.worldTickers.size(); index++) { 
+			WorldTicker ticker = worldTickers.get(index);
 			// Tick all worlds but one on a separate thread
-			if (index < this.worldTickers.size() - 1) {
-				AsyncUtil.run(this.worldTickers.get(index), this.worldTickExecutor);
+			if (index < asyncTaskCount) {
+				AsyncUtil.run(ticker, worldTickExecutor);
 			} else {
 				// Run the last ticker on the main thread, no need to schedule it async as all
 				// other tickers are running already
-				this.worldTickers.get(index).run();
+				ticker.run();
 			}
 		}
 
 		try {
-			// Wait for worlds to finish ticking then reset latch
+			// Wait for worlds to finish ticking
 			latch.waitTillZero();
-			this.latch.reset(this.worldTickers.size());;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		} finally {
+			latch.reset(this.worldTickers.size());;
 		}
 	}
 
