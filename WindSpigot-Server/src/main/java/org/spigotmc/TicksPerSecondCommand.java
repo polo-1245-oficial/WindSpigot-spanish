@@ -46,7 +46,7 @@ public class TicksPerSecondCommand extends Command {
 			tileEntityCount = tileEntityCount + world.tileEntityList.size();
 		}
 		
-		sender.sendMessage(ChatColor.DARK_AQUA + "WindSpigot Performance:");
+		sender.sendMessage(ChatColor.DARK_AQUA + "atencion:");
 		sender.sendMessage(ChatColor.AQUA + "TPS from last 1m, 5m, 15m: "
 				+ org.apache.commons.lang.StringUtils.join(tpsAvg, ", "));
 		sender.sendMessage(ChatColor.AQUA + "Current Memory Usage: " + ChatColor.GREEN
